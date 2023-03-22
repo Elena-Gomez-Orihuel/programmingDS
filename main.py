@@ -45,7 +45,7 @@ if __name__ == '__main__':
     filename = 'amundi-msci-wrld-ae-c.csv'
     df.to_csv(filename, index=False)
     """
-    You can repeat the above code for each of the assets (e.g., stocks, corporate bonds, public bonds, gold, cash) by 
+    Repeat the above code for each of the assets (e.g., stocks, corporate bonds, public bonds, gold, cash) by 
     changing the URL and filename accordingly. The URLs for the other assets are as follows:
 
     db-x-trackers-ii-global-sovereign-5: https://www.investing.com/etfs/db-x-trackers-ii-global-sovereign-5-historical-data
