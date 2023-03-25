@@ -39,8 +39,13 @@ if __name__ == '__main__':
         #// *[ @ id = "onetrust-accept-btn-handler"]
         cookies_button = WebDriverWait(driver,60).until(EC.element_to_be_clickable((By.ID,"onetrust-accept-btn-handler")))
         cookies_button.click()
-        time.sleep(1000)
+        #Historical data button
+        historical_data_button = WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.LINK_TEXT,"Historical Data")))
+        historical_data_button.click()
 
+
+
+        time.sleep(1000)
 
     #webdriver_options = Options()
 
