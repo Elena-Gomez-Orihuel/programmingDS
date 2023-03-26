@@ -42,7 +42,12 @@ if __name__ == '__main__':
         #Historical data button
         historical_data_button = WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.LINK_TEXT,"Historical Data")))
         historical_data_button.click()
-
+        #Date icon button
+        date_button = WebDriverWait(driver,20).until(EC.element_to_be_clickable((By.CLASS_NAME,"DatePickerWrapper_input__MDvWH")))
+        date_button.click()
+        #send keys
+        #NativeDateInput_root__wbgyP
+        #NativeDateInput_root__wbgyP
 
 
         time.sleep(1000)
