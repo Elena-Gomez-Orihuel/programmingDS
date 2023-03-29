@@ -13,7 +13,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
+from selenium.webdriver.firefox.service import Service
+
+
 from selenium.webdriver.common.keys import Keys
+
 from webdriver_manager.chrome import ChromeDriverManager
 import warnings
 
@@ -23,7 +27,7 @@ import warnings
 if __name__ == '__main__':
     warnings.filterwarnings("ignore", category=DeprecationWarning)
     #Navigation options
-    options = Options()
+    options = webdriver.FirefoxOptions()
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument("--start-maximized")
@@ -31,9 +35,12 @@ if __name__ == '__main__':
     #Opening investing.com
     #Navigator initialization
     #driver.get('https://www.investing.com/etfs/ishares-global-corporate-bond-$')
-    with webdriver.Chrome(service=Service(executable_path=ChromeDriverManager().install()), options=options) as driver:
+    from webdriver_manager.firefox import GeckoDriverManager
+
+    with webdriver.Firefox(service=Service(executable_path=GeckoDriverManager().install()), options=options) as driver:
         #for asset in assets:
         driver.get("https://www.investing.com/etfs/ishares-global-corporate-bond-$")
+        #/html/body/div[1]/div[2]/div/div/div[2]/main/div/div[5]/div/div/div[2]/div[2]/div[2]/div[2]/div[1]/div/div[2]/input
 
         #Cookies button
         #// *[ @ id = "onetrust-accept-btn-handler"]
@@ -45,12 +52,52 @@ if __name__ == '__main__':
         #Date icon button
         date_button = WebDriverWait(driver,20).until(EC.element_to_be_clickable((By.CLASS_NAME,"DatePickerWrapper_input__MDvWH")))
         date_button.click()
-        #send keys
-        #NativeDateInput_root__wbgyP
-        #NativeDateInput_root__wbgyP
+
+        #send keys START DATE
+        # Sending start date
+        ## The starting date of the analysis.
+        START_DATE = "01-01-2020"
+        ## The ending date of the analysis.
+        END_DATE = "12-31-2020"
+        #
+        from datetime import datetime
+
+        date_string = '2020-01-01'
+
+        start_date_input = driver.find_element(By.XPATH, '//*[@id="__next"]/div[2]/div/div/div[2]/main/div/div[4]/div/div/div[2]/div[2]/div[2]/div[2]/div[1]/div/div[1]/input')
+        start_date_input.clear()  # Clear any existing date value
+        new_start_date = "2020-01-02"  # Replace with the desired date string
+        start_date_input.send_keys(new_start_date)
+
+        end_date_input = driver.find_element(By.CSS_SELECTOR,
+                                             'div.NativeDateInput_root__wbgyP:nth-child(2) > input:nth-child(1)')
+
+        end_date_input.clear()  # Clear any existing date value
+        new_end_date = "2021-01-01"  # Replace with the desired date string
+        end_date_input.send_keys(new_end_date)
+        """
+        en vez de clickable, f.presenceofelementlocated
+        
+        probar get valor que ya hay
+        """
+        """
+        tiene como que accede al input y hae for i, date in input
+        el input lo coge con driver = findelementbyxpaht (o css selector, mas segura de lo ultimo a input = date o algo asi, chatgpt me dio algo parecido)
+        """
+        #Apply button
+        #inv-button HistoryDatePicker_apply-button__fPr_G
+        apply_button = WebDriverWait(driver, 60).until(
+            EC.element_to_be_clickable((By.CLASS_NAME, "inv-button.HistoryDatePicker_apply-button__fPr_G")))
+        apply_button.click()
+
+        #Download button
+        #download-data_download-data__jxNYT
+        #download_button = WebDriverWait(driver, 60).until(
+        #    EC.element_to_be_clickable((By.CLASS_NAME, "download-data_download-data__jxNYT")))
+        #download_button.click()
 
 
-        time.sleep(1000)
+        time.sleep(500)
 
     #webdriver_options = Options()
 
