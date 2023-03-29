@@ -46,23 +46,42 @@ if __name__ == '__main__':
         #// *[ @ id = "onetrust-accept-btn-handler"]
         cookies_button = WebDriverWait(driver,60).until(EC.element_to_be_clickable((By.ID,"onetrust-accept-btn-handler")))
         cookies_button.click()
+        #login
+        #inv-button user-area_link__Xa7Br
+        login_button = WebDriverWait(driver, 60).until(
+            EC.element_to_be_clickable((By.CLASS_NAME, "inv-button.user-area_link__Xa7Br")))
+        login_button.click()
+        #login with email
+        #inv-button social-auth-button_button__FiobW social-auth-button_icon__PRIVZ social-auth-button_email__o7pnA signin_button__5lDBE
+        email_button = WebDriverWait(driver, 60).until(
+            EC.element_to_be_clickable((By.CLASS_NAME, "inv-button.social-auth-button_button__FiobW.social-auth-button_icon__PRIVZ.social-auth-button_email__o7pnA.signin_button__5lDBE")))
+        email_button.click()
+        #enter email
+        #input_input__FGe3c
+        email_input = WebDriverWait(driver, 60).until(
+            EC.element_to_be_clickable((By.CLASS_NAME, "input_input__FGe3c")))
+        email_input.send_keys("eleniliagomez@outlook.es")
+
+        #enter pwd
+        pwd_input = WebDriverWait(driver, 60).until(
+            EC.element_to_be_clickable((By.CLASS_NAME, "input_input__FGe3c.input_password__B_iju")))
+        pwd_input.send_keys("1d8715d6elena")
+
+
+        #click loginbutton
+        #inv-button signin_primaryBtn__Z16kI mb-4
+        final_login = WebDriverWait(driver, 60).until(
+            EC.element_to_be_clickable((By.CLASS_NAME,
+                                        "inv-button.signin_primaryBtn__Z16kI.mb-4")))
+        final_login.click()
+
+        #---------------------------------------------------------------------------------------------------------------------------------------------
         #Historical data button
         historical_data_button = WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.LINK_TEXT,"Historical Data")))
         historical_data_button.click()
         #Date icon button
         date_button = WebDriverWait(driver,20).until(EC.element_to_be_clickable((By.CLASS_NAME,"DatePickerWrapper_input__MDvWH")))
         date_button.click()
-
-        #send keys START DATE
-        # Sending start date
-        ## The starting date of the analysis.
-        START_DATE = "01-01-2020"
-        ## The ending date of the analysis.
-        END_DATE = "12-31-2020"
-        #
-        from datetime import datetime
-
-        date_string = '2020-01-01'
 
         start_date_input = driver.find_element(By.XPATH, '//*[@id="__next"]/div[2]/div/div/div[2]/main/div/div[4]/div/div/div[2]/div[2]/div[2]/div[2]/div[1]/div/div[1]/input')
         start_date_input.clear()  # Clear any existing date value
@@ -71,7 +90,6 @@ if __name__ == '__main__':
 
         end_date_input = driver.find_element(By.CSS_SELECTOR,
                                              'div.NativeDateInput_root__wbgyP:nth-child(2) > input:nth-child(1)')
-
         end_date_input.clear()  # Clear any existing date value
         new_end_date = "2021-01-01"  # Replace with the desired date string
         end_date_input.send_keys(new_end_date)
@@ -92,9 +110,9 @@ if __name__ == '__main__':
 
         #Download button
         #download-data_download-data__jxNYT
-        #download_button = WebDriverWait(driver, 60).until(
-        #    EC.element_to_be_clickable((By.CLASS_NAME, "download-data_download-data__jxNYT")))
-        #download_button.click()
+        download_button = WebDriverWait(driver, 60).until(
+            EC.element_to_be_clickable((By.CLASS_NAME, "download-data_text__Myrn3")))
+        download_button.click()
 
 
         time.sleep(500)
