@@ -238,4 +238,3 @@ if __name__ == '__main__':
                 df.to_csv(asset[1], index=False)
                 table_data = []
         time.sleep(100)
-        #fnioanibfmfdil

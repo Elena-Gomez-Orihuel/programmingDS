@@ -1,6 +1,11 @@
 import tkinter as tk
 import os
 from PIL import Image, ImageTk
+
+os.system('python part1.py')
+os.system('python part2.py')
+os.system('python part3.py')
+"""
 #path variables
 # Get the current working directory
 cwd = os.getcwd()
@@ -62,4 +67,4 @@ root.grid_columnconfigure(1, weight=1)
 
 # Start the GUI event loop
 root.mainloop()
-#vnfdnfiondilnionmfdlinfl
+"""
