@@ -46,17 +46,14 @@ if __name__ == '__main__':
 
     # Opening investing.com
     from webdriver_manager.firefox import GeckoDriverManager
-    """
+
     assets = [['etfs/ishares-global-corporate-bond-$', 'ishares-global-corporate-bond-$.csv'],
               ['funds/amundi-msci-wrld-ae-c', 'amundi-msci-wrld-ae-c.csv'],
               ['etfs/db-x-trackers-ii-global-sovereign-5', 'db-x-trackers-ii-global-sovereign-5.csv'],
               ['etfs/spdr-gold-trust', 'spdr-gold-trust.csv'],
               ['indices/usdollar', 'usdollar.csv']]
-    """
 
-    assets = [
-              ['funds/amundi-msci-wrld-ae-c', 'amundi-msci-wrld-ae-c.csv']]
-    """
+    """   
     https://www.investing.com/etfs/etfs/ishares-global-corporate-bond-$
     https://www.investing.com/etfs/db-x-trackers-ii-global-sovereign-5
     https://www.investing.com/etfs/spdr-gold-trust
