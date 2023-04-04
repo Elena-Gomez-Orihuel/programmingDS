@@ -174,10 +174,11 @@ if __name__ == '__main__':
                 print(result)
                 df.to_csv(asset[1], index=False)
                 table_data = []
+                print('Finish: ' + str(asset[1]))
 
             else:
                 # Set the dates
-                new_start_date = "2020-01-02"
+                new_start_date = "2020-01-01"
                 new_end_date = "2021-01-01"
                 # Date icon button
                 date_button = WebDriverWait(driver, 20).until(
@@ -234,4 +235,5 @@ if __name__ == '__main__':
                 print(result)
                 df.to_csv(asset[1], index=False)
                 table_data = []
-        time.sleep(100)
+                print('Finish: ' + str(asset[1]))
+        time.sleep(20)
