@@ -58,11 +58,11 @@ def parse_date(date_str):
 def calculate_return(portfolio_allocations):
 
     # Read in the share prices from separate CSV files for each asset
-    ST_prices = read_csv_file("amundi-msci-wrld-ae-c_investing.csv")
-    PB_prices = read_csv_file("db-x-trackers-ii-global-sovereign-5_investing.csv")
-    CB_prices = read_csv_file("ishares-global-corporate-bond-$_investing.csv")
-    GO_prices = read_csv_file("spdr-gold-trust_investing.csv")
-    CA_prices = read_csv_file("usdollar_investing.csv")
+    ST_prices = read_csv_file("amundi-msci-wrld-ae-c.csv")
+    PB_prices = read_csv_file("db-x-trackers-ii-global-sovereign-5.csv")
+    CB_prices = read_csv_file("ishares-global-corporate-bond-$.csv")
+    GO_prices = read_csv_file("spdr-gold-trust.csv")
+    CA_prices = read_csv_file("usdollar.csv")
 
     # Extract the share prices as of 01/01/2020
     ST_price_buy = ST_prices["Price"].values[-1]
@@ -102,11 +102,11 @@ def calculate_return(portfolio_allocations):
 def calculate_volatility(portfolio_allocations):
 
     # Read in the share prices from separate CSV files for each asset
-    ST_df = read_csv_file("amundi-msci-wrld-ae-c_investing.csv")
-    PB_df = read_csv_file("db-x-trackers-ii-global-sovereign-5_investing.csv")
-    CB_df = read_csv_file("ishares-global-corporate-bond-$_investing.csv")
-    GO_df = read_csv_file("spdr-gold-trust_investing.csv")
-    CA_df = read_csv_file("usdollar_investing.csv")
+    ST_df = read_csv_file("amundi-msci-wrld-ae-c.csv")
+    PB_df = read_csv_file("db-x-trackers-ii-global-sovereign-5.csv")
+    CB_df = read_csv_file("ishares-global-corporate-bond-$.csv")
+    GO_df = read_csv_file("spdr-gold-trust.csv")
+    CA_df = read_csv_file("usdollar.csv")
     
     ST_df['Parsed_Date'] = ST_df['Date'].apply(parse_date)
     PB_df['Parsed_Date'] = PB_df['Date'].apply(parse_date)
