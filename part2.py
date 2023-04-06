@@ -4,40 +4,65 @@ from math import factorial
 import pandas as pd
 import statistics
 from math import sqrt
-
+from datetime import datetime
 
 ######################### Portforlio allocations ################################
 def num_combinations(m, n):
     return factorial(m+n-1) // (factorial(n) * factorial(m - 1))
 
-def create_portfolio_allocations_csv(assets, delta):
+def create_portfolio_allocations_df(assets, delta):
     total = 100
     num_pieces = total // delta
     if num_pieces == 0 or total % delta != 0:
         raise ValueError("Invalid delta value. Please, select a valid delta value between: 1, 2, 4, 5, 10, 20, 25, 50 and 100")
     combinations = list(product(range(num_pieces+1), repeat=len(assets)))
-    with open('portfolio_allocations.csv', mode='w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(assets)
-        for combination in combinations:
-            if sum(combination) == num_pieces:
-                row = [int(x*delta) for x in combination]
-                writer.writerow(row)
-    print('Number of combinations: ' + str(num_combinations(len(assets), num_pieces)))
+    rows = []
+    for combination in combinations:
+        if sum(combination) == num_pieces:
+            row = [int(x*delta) for x in combination]
+            rows.append(row)
+    df = pd.DataFrame(rows, columns=assets)
+    print('Number of combinations in the portfolio: ' + str(num_combinations(len(assets), num_pieces)))
+    return df
 
 
 ################## Portforlio performance #######################
 
-#################### Return #######################
-def calculate_return():
-    portfolio_allocations = pd.read_csv("portfolio_allocations.csv")
+################## Support functions #######################
+# This function helps read a CSV file independently of its format, and ensures that the file has more than one column. 
+# It returns the resulting pandas DataFrame.
+def read_csv_file(filename):
+    try:
+        df = pd.read_csv(filename)
+        if df.shape[1] <= 1:
+            raise ValueError("The file has 1 or fewer columns")
+    except:
+        try:
+            df = pd.read_csv(filename, sep='\t', encoding='utf-8', decimal='.')
+            if df.shape[1] <= 1:
+                raise ValueError("The file has 1 or fewer columns")
+        except:
+            print(f"Error while reading the file {filename}")
+            return None
+    return df
+
+# This function helps parse a date string independently of its format, and returns a datetime object.
+def parse_date(date_str):
+    try:
+        return datetime.strptime(date_str, '%m/%d/%Y')
+    except ValueError:
+        return datetime.strptime(date_str, '%b %d, %Y')
+    
+
+############################## Return ######################################
+def calculate_return(portfolio_allocations):
 
     # Read in the share prices from separate CSV files for each asset
-    ST_prices = pd.read_csv("amundi-msci-wrld-ae-c.csv")
-    PB_prices = pd.read_csv("db-x-trackers-ii-global-sovereign-5.csv")
-    CB_prices = pd.read_csv("ishares-global-corporate-bond-$.csv")
-    GO_prices = pd.read_csv("spdr-gold-trust.csv")
-    CA_prices = pd.read_csv("usdollar.csv")
+    ST_prices = read_csv_file("amundi-msci-wrld-ae-c_investing.csv")
+    PB_prices = read_csv_file("db-x-trackers-ii-global-sovereign-5_investing.csv")
+    CB_prices = read_csv_file("ishares-global-corporate-bond-$_investing.csv")
+    GO_prices = read_csv_file("spdr-gold-trust_investing.csv")
+    CA_prices = read_csv_file("usdollar_investing.csv")
 
     # Extract the share prices as of 01/01/2020
     ST_price_buy = ST_prices["Price"].values[-1]
@@ -73,30 +98,30 @@ def calculate_return():
     # Return the list of returns values
     return return_list    
 
-#################### Volatility #######################
-def calculate_volatility():
+############################ Volatility ################################
+def calculate_volatility(portfolio_allocations):
+
     # Read in the share prices from separate CSV files for each asset
-    portfolio_allocations = pd.read_csv("portfolio_allocations.csv")
-
-    ST_df = pd.read_csv("amundi-msci-wrld-ae-c.csv")
-    PB_df = pd.read_csv("db-x-trackers-ii-global-sovereign-5.csv")
-    CB_df = pd.read_csv("ishares-global-corporate-bond-$.csv")
-    GO_df = pd.read_csv("spdr-gold-trust.csv")
-    CA_df = pd.read_csv("usdollar.csv")
+    ST_df = read_csv_file("amundi-msci-wrld-ae-c_investing.csv")
+    PB_df = read_csv_file("db-x-trackers-ii-global-sovereign-5_investing.csv")
+    CB_df = read_csv_file("ishares-global-corporate-bond-$_investing.csv")
+    GO_df = read_csv_file("spdr-gold-trust_investing.csv")
+    CA_df = read_csv_file("usdollar_investing.csv")
     
-    ST_df['Date'] = pd.to_datetime(ST_df['Date'], format='%b %d, %Y')
-    PB_df['Date'] = pd.to_datetime(PB_df['Date'], format='%m/%d/%Y')
-    CB_df['Date'] = pd.to_datetime(CB_df['Date'], format='%m/%d/%Y')
-    GO_df['Date'] = pd.to_datetime(GO_df['Date'], format='%m/%d/%Y')
-    CA_df['Date'] = pd.to_datetime(CA_df['Date'], format='%m/%d/%Y')
+    ST_df['Parsed_Date'] = ST_df['Date'].apply(parse_date)
+    PB_df['Parsed_Date'] = PB_df['Date'].apply(parse_date)
+    CB_df['Parsed_Date'] = CB_df['Date'].apply(parse_date)
+    GO_df['Parsed_Date'] = GO_df['Date'].apply(parse_date)
+    CA_df['Parsed_Date'] = CA_df['Date'].apply(parse_date)
 
-    all_dates = ST_df.merge(PB_df, on='Date', how='inner', suffixes=('_ST', '_PB')).merge(CB_df, on='Date', how='inner', suffixes=('_PB', '_CB')).merge(GO_df, on='Date', how='inner', suffixes=('_CB', '_GO')).merge(CA_df, on='Date', how='inner', suffixes=('_GO', '_CA'))
+
+    all_dates = ST_df.merge(PB_df, on='Parsed_Date', how='inner', suffixes=('_ST', '_PB')).merge(CB_df, on='Parsed_Date', how='inner', suffixes=('_PB', '_CB')).merge(GO_df, on='Parsed_Date', how='inner', suffixes=('_CB', '_GO')).merge(CA_df, on='Parsed_Date', how='inner', suffixes=('_GO', '_CA'))
     # Crear una máscara booleana para cada dataset indicando si la fecha está presente en la lista de fechas únicas
-    mask1 = ST_df['Date'].isin(all_dates['Date'])
-    mask2 = PB_df['Date'].isin(all_dates['Date'])
-    mask3 = CB_df['Date'].isin(all_dates['Date'])
-    mask4 = GO_df['Date'].isin(all_dates['Date'])
-    mask5 = CA_df['Date'].isin(all_dates['Date'])
+    mask1 = ST_df['Parsed_Date'].isin(all_dates['Parsed_Date'])
+    mask2 = PB_df['Parsed_Date'].isin(all_dates['Parsed_Date'])
+    mask3 = CB_df['Parsed_Date'].isin(all_dates['Parsed_Date'])
+    mask4 = GO_df['Parsed_Date'].isin(all_dates['Parsed_Date'])
+    mask5 = CA_df['Parsed_Date'].isin(all_dates['Parsed_Date'])
 
     ST_df = ST_df[mask1]
     PB_df = PB_df[mask2]
@@ -131,16 +156,17 @@ def calculate_volatility():
         VOLAT.append(volatility)
     return VOLAT
 
-#################### Metrics #######################
-def calculate_metrics():
-    portfolio_metrics = pd.read_csv("portfolio_allocations.csv")
-    portfolio_metrics['RETURN'] = calculate_return()
-    portfolio_metrics['VOLAT'] = calculate_volatility()
-    portfolio_metrics.to_csv("portfolio_metrics.csv", index=False) 
+############################## Metrics ######################################
+def calculate_metrics(portfolio_allocations_df):
+    portfolio_allocations_df['RETURN'] = calculate_return(portfolio_allocations_df)
+    portfolio_allocations_df['VOLAT'] = calculate_volatility(portfolio_allocations_df)
+    portfolio_allocations_df.to_csv("portfolio_metrics.csv", index=False) 
 
 ############### Main ejecution ####################
 if __name__ == '__main__':
+    # Crating the portfolio
     assets = ['ST', 'CB', 'PB', 'GO', 'CA']
     delta = 20
-    create_portfolio_allocations_csv(assets, delta)
-    calculate_metrics()
+    portfolio_allocations_df = create_portfolio_allocations_df(assets, delta)
+    # Computing Return and Volatility
+    calculate_metrics(portfolio_allocations_df)

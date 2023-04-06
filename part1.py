@@ -47,18 +47,17 @@ if __name__ == '__main__':
     # Opening investing.com
     from webdriver_manager.firefox import GeckoDriverManager
 
-    assets = [['etfs/ishares-global-corporate-bond-$', 'ishares-global-corporate-bond-$.csv'],
-              ['funds/amundi-msci-wrld-ae-c', 'amundi-msci-wrld-ae-c.csv'],
-              ['etfs/db-x-trackers-ii-global-sovereign-5', 'db-x-trackers-ii-global-sovereign-5.csv'],
-              ['etfs/spdr-gold-trust', 'spdr-gold-trust.csv'],
-              ['indices/usdollar', 'usdollar.csv']]
+    assets = [['etfs/ishares-global-corporate-bond-$', 'ishares-global-corporate-bond-$_investing.csv'],
+              ['funds/amundi-msci-wrld-ae-c', 'amundi-msci-wrld-ae-c_investing.csv'],
+              ['etfs/db-x-trackers-ii-global-sovereign-5', 'db-x-trackers-ii-global-sovereign-5_investing.csv'],
+              ['etfs/spdr-gold-trust', 'spdr-gold-trust_investing.csv'],
+              ['indices/usdollar', 'usdollar_investing.csv']]
 
     """   
     https://www.investing.com/etfs/etfs/ishares-global-corporate-bond-$
     https://www.investing.com/etfs/db-x-trackers-ii-global-sovereign-5
     https://www.investing.com/etfs/spdr-gold-trust
     https://www.investing.com/indices/usdollar
-
     https://www.investing.com/funds/amundi-msci-wrld-ae-c
     """
     with webdriver.Firefox(service=Service(executable_path=GeckoDriverManager().install()), options=options) as driver:
@@ -97,12 +96,10 @@ if __name__ == '__main__':
             email_input = WebDriverWait(driver, 60).until(
                 EC.element_to_be_clickable((By.CLASS_NAME, "input_input__FGe3c")))
             email_input.send_keys("eleniliagomez@outlook.es")
-
             #enter pwd
             pwd_input = WebDriverWait(driver, 60).until(
                 EC.element_to_be_clickable((By.CLASS_NAME, "input_input__FGe3c.input_password__B_iju")))
             pwd_input.send_keys("1d8715d6elena")
-
             #click loginbutton
             #inv-button signin_primaryBtn__Z16kI mb-4
             final_login = WebDriverWait(driver, 60).until(
@@ -174,7 +171,7 @@ if __name__ == '__main__':
                 print(result)
                 df.to_csv(asset[1], index=False)
                 table_data = []
-                print('Finish: ' + str(asset[1]))
+                print('Finish: ', asset[1])
 
             else:
                 # Set the dates
@@ -235,5 +232,5 @@ if __name__ == '__main__':
                 print(result)
                 df.to_csv(asset[1], index=False)
                 table_data = []
-                print('Finish: ' + str(asset[1]))
+                print('Finish: ', asset[1])
         time.sleep(20)
