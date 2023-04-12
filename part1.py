@@ -175,7 +175,7 @@ if __name__ == '__main__':
 
             else:
                 # Set the dates
-                new_start_date = "2020-01-01"
+                new_start_date = "2020-01-02"
                 new_end_date = "2021-01-01"
                 # Date icon button
                 date_button = WebDriverWait(driver, 20).until(
