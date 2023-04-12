@@ -63,6 +63,10 @@ def calculate_return(portfolio_allocations):
     CB_prices = read_csv_file("ishares-global-corporate-bond-$.csv")
     GO_prices = read_csv_file("spdr-gold-trust.csv")
     CA_prices = read_csv_file("usdollar.csv")
+    # Normalize the values of CA fixing the price of the first day as 1$ -> 1$
+    CA_prices['Price'] = CA_prices['Price'] / 100
+    CA_price_initial_value = CA_prices['Price'].values[-1]
+    CA_prices['Price'] = CA_prices['Price'] / CA_price_initial_value
 
     # Extract the share prices as of 01/01/2020
     ST_price_buy = ST_prices["Price"].values[-1]
@@ -85,9 +89,15 @@ def calculate_return(portfolio_allocations):
         # Extract the portfolio allocations for the current row
         portfolio = portfolio_allocations.iloc[i].to_dict()
         
+        ST_shares_amount = portfolio["ST"] / ST_price_buy
+        PB_shares_amount = portfolio["PB"] / PB_price_buy
+        CB_shares_amount = portfolio["CB"] / CB_price_buy
+        GO_shares_amount = portfolio["GO"] / GO_price_buy
+        CA_shares_amount = portfolio["CA"] / CA_price_buy
+
         # Calculate the total buy amount and current value of the portfolio
-        buy_amount = (portfolio["ST"] * ST_price_buy) + (portfolio["CB"] * CB_price_buy) + (portfolio["PB"] * PB_price_buy) + (portfolio["GO"] * GO_price_buy) + (portfolio["CA"] * CA_price_buy)
-        current_value = (portfolio["ST"] * ST_prices_current) + (portfolio["CB"] * CB_price_current) + (portfolio["PB"] * PB_prices_current) + (portfolio["GO"] * GO_price_current) + (portfolio["CA"] * CA_price_current)
+        buy_amount = (ST_shares_amount * ST_price_buy) + (CB_shares_amount * CB_price_buy) + (PB_shares_amount * PB_price_buy) + (GO_shares_amount * GO_price_buy) + (CA_shares_amount * CA_price_buy)
+        current_value = (ST_shares_amount * ST_prices_current) + (CB_shares_amount * CB_price_current) + (PB_shares_amount * PB_prices_current) + (GO_shares_amount * GO_price_current) + (CA_shares_amount * CA_price_current)
         
         # Calculate the portfolio return as a percentage
         portfolio_return = ((current_value - buy_amount) / buy_amount) * 100
@@ -107,7 +117,7 @@ def calculate_volatility(portfolio_allocations):
     CB_df = read_csv_file("ishares-global-corporate-bond-$.csv")
     GO_df = read_csv_file("spdr-gold-trust.csv")
     CA_df = read_csv_file("usdollar.csv")
-    
+
     ST_df['Parsed_Date'] = ST_df['Date'].apply(parse_date)
     PB_df['Parsed_Date'] = PB_df['Date'].apply(parse_date)
     CB_df['Parsed_Date'] = CB_df['Date'].apply(parse_date)
@@ -134,6 +144,10 @@ def calculate_volatility(portfolio_allocations):
     CB_prices = CB_df["Price"].values
     GO_prices = GO_df["Price"].values
     CA_prices = CA_df["Price"].values
+    # Normalize the values of CA fixing the price of the first day as 1$ -> 1$
+    CA_prices = CA_prices / 100
+    CA_price_initial_value = CA_prices[-1]
+    CA_prices = CA_prices / CA_price_initial_value
 
     # Create an empty DataFrame to store the values of Value
     VOLAT=[]
@@ -142,8 +156,15 @@ def calculate_volatility(portfolio_allocations):
         # Extract the portfolio allocations for the current row
         values_porfolio = []
         portfolio = portfolio_allocations.iloc[i].to_dict()
+
+        ST_shares_amount = portfolio["ST"] / ST_prices[-1]
+        PB_shares_amount = portfolio["PB"] / PB_prices[-1]
+        CB_shares_amount = portfolio["CB"] / CB_prices[-1]
+        GO_shares_amount = portfolio["GO"] / GO_prices[-1]
+        CA_shares_amount = portfolio["CA"] / CA_prices[-1]
+
         for j in range(len(ST_prices)):
-            value = (portfolio["ST"] * ST_prices[j]) + (portfolio["CB"] *CB_prices[j] ) + (portfolio["PB"] * PB_prices[j]) + (portfolio["GO"] * GO_prices[j]) + (portfolio["CA"] * CA_prices[j])
+            value = (ST_shares_amount * ST_prices[j]) + (CB_shares_amount * CB_prices[j] ) + (PB_shares_amount * PB_prices[j]) + (GO_shares_amount * GO_prices[j]) + (CA_shares_amount * CA_prices[j])
             values_porfolio.append(value)
         #media
         portfolio_mean = statistics.mean(values_porfolio)
@@ -152,7 +173,7 @@ def calculate_volatility(portfolio_allocations):
         portfolio_stdev = sqrt(sum((x - portfolio_mean)**2 for x in values_porfolio) / (len(values_porfolio)))
 
         #volatility
-        volatility= (portfolio_stdev/portfolio_mean)*100
+        volatility = (portfolio_stdev/portfolio_mean)*100
         VOLAT.append(volatility)
     return VOLAT
 
