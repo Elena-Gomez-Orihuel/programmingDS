@@ -6,7 +6,12 @@ This is a project for the subject Programming for Data Science.
 
 The project is divided into three parts:
 
-- **Part 1**: Generates 5 CSV files corresponding to each of the assets.
+- **Part 1**: Generates 5 CSV files corresponding to each of the assets. The assets are:
+  - _Stocks (ST)_:
+  - _Corporate bonds (CB)_:
+  - _Public bonds (PB)_:
+  - _Gold (GO)_:
+  - _Cash (CA)_:
 - **Part 2**: Generates the "portfolio_metrics.csv" file where the return and volatility have been calculated for each of the possible portfolios.
 - **Part 3**: Conducts a data analysis generating different graphs that will serve to analyze the data and draw conclusions.
 
