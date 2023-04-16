@@ -14,14 +14,14 @@ This is a project for the subject Programming for Data Science.
 
 The project is divided into three parts:
 
-- **Part 1**: Generates 5 CSV files corresponding to each of the assets (through _web scraping_). The assets are:
+- **Part 1 - Web Scraping:** Generates 5 CSV files corresponding to each of the assets (through _web scraping_). The assets are:
   - ***Stocks (ST):*** _amundi-msci-world-ae-c.csv_
   - ***Corporate bonds (CB):*** _ishares-global-corporate-bond-$.csv_
   - ***Public bonds (PB):*** _db-x-trackers-ii-global-sovereign-5.csv_
   - ***Gold (GO):*** _spdr-gold-trust.csv_
   - ***Cash (CA):*** _usdollar.csv_
-- **Part 2**: Generates the _portfolio_metrics.csv_ file where the return and volatility have been calculated for each of the possible portfolios.
-- **Part 3**: Conducts a data analysis generating different graphs that will serve to analyze the data and draw conclusions.
+- **Part 2 - Data Generation:** Generates the _portfolio_metrics.csv_ file where the return and volatility have been calculated for each of the possible portfolios.
+- **Part 3 - Data Analysis:** Conducts a data analysis generating different graphs that will serve to analyze the data and draw conclusions.
 
 ## Installation
 
