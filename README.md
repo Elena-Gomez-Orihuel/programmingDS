@@ -7,11 +7,11 @@ This is a project for the subject Programming for Data Science.
 The project is divided into three parts:
 
 - **Part 1**: Generates 5 CSV files corresponding to each of the assets. The assets are:
-  - <u>Stocks (ST)</u>: amundi-msci-world-ae-c.csv
-  - _Corporate bonds (CB)_: ishares-global-corporate-bond-$.csv
-  - _Public bonds (PB)_: db-x-trackers-ii-global-sovereign-5.csv
-  - _Gold (GO)_: spdr-gold-trust.csv
-  - _Cash (CA)_: usdollar.csv
+  - ***Stocks (ST):*** _amundi-msci-world-ae-c.csv_
+  - ***Corporate bonds (CB):*** _ishares-global-corporate-bond-$.csv_
+  - ***Public bonds (PB):*** _db-x-trackers-ii-global-sovereign-5.csv_
+  - ***Gold (GO):*** _spdr-gold-trust.csv_
+  - ***Cash (CA):*** _usdollar.csv_
 - **Part 2**: Generates the "portfolio_metrics.csv" file where the return and volatility have been calculated for each of the possible portfolios.
 - **Part 3**: Conducts a data analysis generating different graphs that will serve to analyze the data and draw conclusions.
 
