@@ -1,4 +1,4 @@
-import csv
+import os
 from itertools import product
 from math import factorial
 import pandas as pd
@@ -83,11 +83,11 @@ def calculate_return(portfolio_allocations):
     ###################################################################
 
     # Read in the share prices from separate CSV files for each asset
-    ST_prices = read_csv_file("amundi-msci-wrld-ae-c.csv")
-    PB_prices = read_csv_file("db-x-trackers-ii-global-sovereign-5.csv")
-    CB_prices = read_csv_file("ishares-global-corporate-bond-$.csv")
-    GO_prices = read_csv_file("spdr-gold-trust.csv")
-    CA_prices = read_csv_file("usdollar.csv")
+    ST_prices = read_csv_file("./outputs/web_scraping/amundi-msci-wrld-ae-c.csv")
+    PB_prices = read_csv_file("./outputs/web_scraping/db-x-trackers-ii-global-sovereign-5.csv")
+    CB_prices = read_csv_file("./outputs/web_scraping/ishares-global-corporate-bond-$.csv")
+    GO_prices = read_csv_file("./outputs/web_scraping/spdr-gold-trust.csv")
+    CA_prices = read_csv_file("./outputs/web_scraping/usdollar.csv")
     # Normalize the values of CA fixing the price of the first day as 1$ -> 1$
     CA_prices['Price'] = CA_prices['Price'] / 100
     CA_price_initial_value = CA_prices['Price'].values[-1]
@@ -146,11 +146,11 @@ def calculate_volatility(portfolio_allocations):
     ########################################################################
 
     # Read in the share prices from separate CSV files for each asset
-    ST_df = read_csv_file("amundi-msci-wrld-ae-c.csv")
-    PB_df = read_csv_file("db-x-trackers-ii-global-sovereign-5.csv")
-    CB_df = read_csv_file("ishares-global-corporate-bond-$.csv")
-    GO_df = read_csv_file("spdr-gold-trust.csv")
-    CA_df = read_csv_file("usdollar.csv")
+    ST_df = read_csv_file("./outputs/web_scraping/amundi-msci-wrld-ae-c.csv")
+    PB_df = read_csv_file("./outputs/web_scraping/db-x-trackers-ii-global-sovereign-5.csv")
+    CB_df = read_csv_file("./outputs/web_scraping/ishares-global-corporate-bond-$.csv")
+    GO_df = read_csv_file("./outputs/web_scraping/spdr-gold-trust.csv")
+    CA_df = read_csv_file("./outputs/web_scraping/usdollar.csv")
 
     ST_df['Parsed_Date'] = ST_df['Date'].apply(parse_date)
     PB_df['Parsed_Date'] = PB_df['Date'].apply(parse_date)
@@ -215,7 +215,10 @@ def calculate_volatility(portfolio_allocations):
 def calculate_metrics(portfolio_allocations_df):
     portfolio_allocations_df['RETURN'] = calculate_return(portfolio_allocations_df)
     portfolio_allocations_df['VOLAT'] = calculate_volatility(portfolio_allocations_df)
-    portfolio_allocations_df.to_csv("portfolio_metrics.csv", index=False) 
+    # Check if folder exists, if not, create it
+    if not os.path.exists('./outputs/data_generation'):
+        os.makedirs('./outputs/data_generation')
+    portfolio_allocations_df.to_csv("./outputs/data_generation/portfolio_metrics.csv", index=False) 
 
 ############### Main ejecution ####################
 if __name__ == '__main__':

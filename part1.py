@@ -1,3 +1,4 @@
+import os
 import csv
 import time
 import pandas as pd
@@ -65,10 +66,8 @@ if __name__ == '__main__':
         table_data = []
         table = ""
         for asset in assets:
-            print("WEB")
-            print(asset[0])
-            print("CSV")
-            print(asset[1])
+            print("Starting with: " + asset[1])
+            print("WEB: " + "https://www.investing.com/" + asset[0])
 
             driver.get("https://www.investing.com/" + asset[0])
 
@@ -114,7 +113,6 @@ if __name__ == '__main__':
             historical_data_button.click()
             click_not_login(driver)
             if asset[0] == 'funds/amundi-msci-wrld-ae-c':
-                #print("holIF")
                 # Set the dates
                 new_start_date = "01/01/2020"
                 new_end_date = "12/31/2020"
@@ -143,10 +141,6 @@ if __name__ == '__main__':
 
                 # Create a list of lists containing the data from the table
                 table = driver.find_element(By.ID, 'curr_table')
-                if table is not None:
-                    print("yay we have a table")
-                else:
-                    print("Table element not found")
 
                 rows = table.find_elements(By.TAG_NAME, 'tr')
                 # loop through each row
@@ -166,10 +160,10 @@ if __name__ == '__main__':
                 df = df.drop([2, 3, 4], axis=1)
                 # assign column names
                 df.columns = ['Date', 'Price', 'Change']
-                # types of the columns
-                result = df.dtypes
-                print(result)
-                df.to_csv(asset[1], index=False)
+                # Check if folder exists, if not, create it
+                if not os.path.exists('./outputs/web_scraping'):
+                    os.makedirs('./outputs/web_scraping')
+                df.to_csv('./outputs/web_scraping/' + asset[1], index=False)
                 table_data = []
                 print('Finish: ', asset[1])
 
@@ -203,13 +197,7 @@ if __name__ == '__main__':
                 # Create a list of lists containing the data from the table
                 table = driver.find_element("xpath", '//*[@data-test="historical-data-table"]')
 
-                if table is not None:
-                    print("yay we have a table")
-                else:
-                    print("Table element not found")
-
                 rows = table.find_elements(By.TAG_NAME, 'tr')
-                print("GOT THE TABLE")
                 # loop through each row
                 for row in rows:
                     row_data = []
@@ -227,10 +215,10 @@ if __name__ == '__main__':
                 df = df.drop([2, 3, 4], axis=1)
                 # assign column names
                 df.columns = ['Date', 'Price', 'Vol', 'Change']
-                # types of the columns
-                result = df.dtypes
-                print(result)
-                df.to_csv(asset[1], index=False)
+                # Check if folder exists, if not, create it
+                if not os.path.exists('./outputs/web_scraping'):
+                    os.makedirs('./outputs/web_scraping')
+                df.to_csv('./outputs/web_scraping/' + asset[1], index=False)
                 table_data = []
                 print('Finish: ', asset[1])
         time.sleep(20)
