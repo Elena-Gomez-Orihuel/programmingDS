@@ -1,6 +1,14 @@
-# programmingDS
+# ProgrammingDS
 
 This is a project for the subject Programming for Data Science.
+
+## Authors
+
+- Elena María Gómez Orihuel
+- María Lara Trullenque
+- Ignacio López Carboneras
+- Jaime Guerrero Carrasco
+- Javier Rocamora García
 
 ## Description
 
