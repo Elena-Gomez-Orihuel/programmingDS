@@ -21,11 +21,13 @@ pip install -r requirements.txt
 
 ############ web scraping #############
 
-- The web scrapping part is available in "part1.py".
+- The web scrapping part is available in "part1.py". 
+- The resulting CSV files are saved in /outputs/web_scraping/ 
 
 ########### data generation ###########
 
 - The file called "part2.py" corresponds to the generation of the portfolios and the calculation of the "return" and "volatility" metrics.
+- The resulting 'portfolio_metrics.csv' is saved in /outputs/data_generation/ 
 
 ########## data analysis ##############
 
