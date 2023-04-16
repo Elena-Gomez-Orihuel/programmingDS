@@ -2,6 +2,8 @@
 
 The code for this project is available at: https://github.com/Elena-Gomez-Orihuel/programmingDS.git
 
+For more information, please refer to the "README.md" file, which is recommended to be viewed from the GitHub page.
+
 # Authors - Group 10
 
 - Elena María Gómez Orihuel
@@ -28,6 +30,3 @@ pip install -r requirements.txt
 ########## data analysis ##############
 
 - The last part, corresponding to the data analysis, is available in "part3_analysis.ipynb". In this file we have generated the graphs that will be used for the analysis of the data in the project report.
-
-
-PD: Please, for further details check the "README.md" file.
