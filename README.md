@@ -35,7 +35,8 @@ To run the project, you need to have Python 3 and the following libraries instal
 - numpy
 
 They can be installed via command:
-    ```
+
+    ```bash
     pip install -r requirements.txt
     ```
 
