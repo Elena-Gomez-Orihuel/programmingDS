@@ -20,7 +20,7 @@ The project is divided into three parts:
   - ***Public bonds (PB):*** _db-x-trackers-ii-global-sovereign-5.csv_
   - ***Gold (GO):*** _spdr-gold-trust.csv_
   - ***Cash (CA):*** _usdollar.csv_
-- **Part 2**: Generates the "portfolio_metrics.csv" file where the return and volatility have been calculated for each of the possible portfolios.
+- **Part 2**: Generates the _portfolio_metrics.csv_ file where the return and volatility have been calculated for each of the possible portfolios.
 - **Part 3**: Conducts a data analysis generating different graphs that will serve to analyze the data and draw conclusions.
 
 ## Installation
