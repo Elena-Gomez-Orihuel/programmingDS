@@ -33,6 +33,6 @@ To run the project, follow these steps:
     ```bash
     python part2.py
     ```
-5. Run the Jupyter Notebook **part3_analysis.ipynb** to generate the graphs that appear in the report.
+5. Run the Jupyter Notebook _part3_analysis.ipynb_ to generate the graphs that appear in the report.
 
 
