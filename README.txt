@@ -2,7 +2,7 @@
 
 The code for this project is available at: https://github.com/Elena-Gomez-Orihuel/programmingDS.git
 
-For a more detailed explanation, please refer to the "README.md" file, which is recommended to be accessed from the GitHub page.
+For a more detailed explanation, please refer to the "README.md" file, which is recommended to be accessed from the GitHub web.
 
 # Authors - Group 10
 
