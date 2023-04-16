@@ -2,7 +2,7 @@
 
 The code for this project is available at: https://github.com/Elena-Gomez-Orihuel/programmingDS.git
 
-# Authors
+# Authors - Group 10
 
 - Elena María Gómez Orihuel
 - María Lara Trullenque
