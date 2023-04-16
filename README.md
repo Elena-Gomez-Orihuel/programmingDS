@@ -7,7 +7,7 @@ This is a project for the subject Programming for Data Science.
 The project is divided into three parts:
 
 - **Part 1**: Generates 5 CSV files corresponding to each of the assets. The assets are:
-  - _Stocks (ST)_: amundi-msci-world-ae-c.csv
+  - <u>Stocks (ST)</u>: amundi-msci-world-ae-c.csv
   - _Corporate bonds (CB)_: ishares-global-corporate-bond-$.csv
   - _Public bonds (PB)_: db-x-trackers-ii-global-sovereign-5.csv
   - _Gold (GO)_: spdr-gold-trust.csv
