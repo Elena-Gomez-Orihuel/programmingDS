@@ -54,11 +54,15 @@ To run the project, follow these steps:
 
 1. Clone the repository to your local machine.
 2. Open a terminal and navigate to the project folder.
-3. Run the following command to generate the CSV files for each of the assets (wait until the _web scraping_ is finished):
+3. Install the necessary requirements
+    ```bash
+    pip install -r requirements.txt
+    ```
+4. Run the following command to generate the CSV files for each of the assets (wait until the _web scraping_ is finished):
     ```bash
     python3 part1.py
     ```
-4. Run the following command to generate the "portfolio_metrics.csv" file:
+5. Run the following command to generate the "portfolio_metrics.csv" file:
     ```bash
     python3 part2.py
     ```
