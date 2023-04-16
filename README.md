@@ -58,7 +58,7 @@ To run the project, follow these steps:
     ```bash
     pip install -r requirements.txt
     ```
-4. Run the following command to generate the CSV files for each of the assets (wait until the _web scraping_ is finished, this may take a few minutes):
+4. Run the following command to generate the CSV files for each of the assets, wait until the _web scraping_ is finished (this may take a few minutes):
     ```bash
     python3 part1.py
     ```
