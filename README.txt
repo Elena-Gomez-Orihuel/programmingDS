@@ -10,6 +10,10 @@ The code for this project is available at: https://github.com/Elena-Gomez-Orihue
 - Jaime Guerrero Carrasco
 - Javier Rocamora García
 
+# Requirements:
+
+The libraries required are in the requirements.txt and can be installed through: pip install -r requirements.txt
+
 # Summary of the files
 
 ############ web scraping #############
