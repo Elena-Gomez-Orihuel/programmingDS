@@ -2,7 +2,7 @@
 
 This is a project for the subject Programming for Data Science.
 
-## Authors
+## Authors - Group 10
 
 - Elena María Gómez Orihuel
 - María Lara Trullenque
