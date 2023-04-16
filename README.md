@@ -21,11 +21,11 @@ The project is divided into three parts:
   - ***Gold (GO):*** _spdr-gold-trust.csv_
   - ***Cash (CA):*** _usdollar.csv_
   
-  The code corresponding to this part can be found in _part1.py_
+  The code corresponding to this part can be found in _part1.py_ and the CSVs are saved in */outputs/web_scraping/*
   
 - **Part 2 - Data Generation:** Generates the _portfolio_metrics.csv_ file where the return and volatility have been calculated for each of the possible portfolios.
 
-  The code corresponding to this part can be found in _part2.py_
+  The code corresponding to this part can be found in _part2.py_ and the 'portfolio_metrics.csv' is saved in */outputs/data_generation/*
 
 - **Part 3 - Data Analysis:** Conducts a data analysis generating different graphs that will serve to analyze the data and draw conclusions.
 
