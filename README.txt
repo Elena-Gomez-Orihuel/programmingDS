@@ -12,7 +12,8 @@ The code for this project is available at: https://github.com/Elena-Gomez-Orihue
 
 # Requirements:
 
-The libraries required are in the requirements.txt and can be installed through: pip install -r requirements.txt
+The libraries required are in the requirements.txt and can be installed through: 
+pip install -r requirements.txt
 
 # Summary of the files
 
