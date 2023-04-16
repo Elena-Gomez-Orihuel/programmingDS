@@ -20,8 +20,16 @@ The project is divided into three parts:
   - ***Public bonds (PB):*** _db-x-trackers-ii-global-sovereign-5.csv_
   - ***Gold (GO):*** _spdr-gold-trust.csv_
   - ***Cash (CA):*** _usdollar.csv_
+  
+  The code corresponding to this part can be found in _part1.py_
+  
 - **Part 2 - Data Generation:** Generates the _portfolio_metrics.csv_ file where the return and volatility have been calculated for each of the possible portfolios.
+
+  The code corresponding to this part can be found in _part2.py_
+
 - **Part 3 - Data Analysis:** Conducts a data analysis generating different graphs that will serve to analyze the data and draw conclusions.
+
+  The code corresponding to this part can be found in _part3_analysis.ipynb_
 
 ## Installation
 
