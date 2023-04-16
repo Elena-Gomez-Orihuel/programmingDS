@@ -28,8 +28,10 @@ To run the project, follow these steps:
 3. Run the following command to generate the CSV files for each of the assets:
 ```bash
 python part1.py
+
 4. Run the following command to generate the "portfolio_metrics.csv" file:
 ```bash
 python part2.py
+
 5. Run the Jupyter Notebook **part3_analysis.ipynb** to generate the graphs that appear in the report. 
 
